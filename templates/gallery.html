@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2>Gallery</h2>
+<ul>
+    <li>
+        {%for item in items%}
+
+            <p>{{item[1]}}: ${{item[2]}}</p>
+            <img src={{item[3]}}>
+            <p>Availabe: {{item[4]}}</p>
+            
+            <label for="quantity">Select Quantity:</label>
+            <input type="number"  min="1" max={{item[4]}}>
+
+            <button type="submit">Add to cart</button>
+
+        {%endfor%}
+    </li>
+</ul>
+{% endblock %}
