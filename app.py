@@ -24,19 +24,44 @@ def login():
 
 @app.route("/login", methods=["POST"])
 def login_form():
-  email = request.form.get("email")
-  password = request.form.get("password")
-  if email == "example@example.com" and password == "password123":
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE email=%s AND password=%s", (email, password))
+    user = cursor.fetchone()
+
+    # if user exists, log them in and redirect to gallery
+    if user:
         session['logged_in'] = True
         return redirect('/gallery')
-  else:
+    # if user does not exist, display error message
+    else:
         return render_template('login.html', error_message="Invalid email or password")
 
 
 
-@app.route('/signup')
+
+@app.route('/signup', methods=["GET", "POST"])
 def sign_up():
-    return render_template('sign_up.html')
+    if request.method == "POST":
+        full_name = request.form.get("full_name")
+        mobile = request.form.get("mobile")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        
+        connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO users (full_name, mobile, email, password) VALUES (%s, %s, %s, %s)", (full_name, mobile, email, password))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        session['logged_in'] = True
+        return redirect('/gallery')
+    else:
+        return render_template('sign_up.html')
 
 
 @app.route('/gallery')

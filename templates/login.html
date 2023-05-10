@@ -4,6 +4,9 @@
 <h1>Login Page</h1>
 
 <div id="login">
+    {% if error_message %}
+        <div class="alert">{{ error_message }}</div>
+    {% endif %}
     <form method="POST">
         <label for="email"></label>
         <input id="email" type="email" name="email" placeholder="Email" required>
