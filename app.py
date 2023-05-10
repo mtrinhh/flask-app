@@ -8,8 +8,12 @@ app.config["SECRET_KEY"] = "My secret key"
 
 
 @app.route('/')
-def index():
+def base():
     return render_template('base.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 
 @app.route('/contact')
@@ -78,6 +82,7 @@ def gallery():
 @app.route('/cart')
 def shopping_cart():
     return render_template('shopping_cart.html')
+
 
 
 if __name__ == "__main__":

@@ -1,9 +1,47 @@
 * {
-    font-family: 'Playfair Display', Georgia, serif;
-    border-radius: 1px solid red;
+    font-family: Gilroy-Regular,sans-serif;
+    /* border: 1px solid red; */
     margin: auto;
-    max-width: 1200px;
+    max-width: 1500px;
+    max-height: 100%;
 }
+
+h1 {
+    font-weight: 100;
+}
+
+
+#nav-container {
+    border-bottom: 1px solid #00325a;
+    border-top: 1px solid #00325a;
+    color: #00325a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    height: 42px;
+}
+
+nav {
+    display: flex;
+    width: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.hero {
+    background-color: #074f57;
+    background-image: url('https://lh3.googleusercontent.com/pw/AJFCJaU_TcKnr7rCsMHI7BuYUtlaug-O9lVTeKKI4rlo2nQcO--VYlXSLQvo4xouSPGubVoqXW_EUjpWhXZzn3q2rjOX-cARu-8LSE6ZvxGQi2KV26YGbOCqEd6PO9vs0Xy7rwthiyRLxttcwOkWdzp9xqNPOdQ1ZpIUM_vwURHyCj_Pli6aHV3L6zJk0BWYViGq_fW9mX_sb4YeLY3-W0yoiR8LPr4lypvHqWRo1uHMUikrYvse8LrcdNLVNDW8ucI0ZIx5FDy9VIA_aM2djvAZgpn0GcMSEh5E7hNOTckYATEmN9tSiRL0nrYhrwFZ02pCzCa_5ad-U7d7iCtiaTAp_aCLpZe7x60V_P7ipccAxjQtlAYNiI3vD_svXgOkEVvbNrGy4Ipz3jZp3_nGcTUHSCXcvijzTNV0vxX7qhVlwfsheNl0Zxhz3ZKucGKTUWw50gwiEb-rPJnWwrs-HCSysOBsnomWSSLWO8fR3WqQ-nQOPDZ6TFIXMxMJ_RPgi6s06CfGRSP388k7-SVfnKfig-YdqJiS_bk6hK8f4XmdCa-gKVNtgusZyFOF3qhCQYMJDeGD7x6vdqZzpOH4_NuSQBJeAUonLieFgzzviU1eKBkljAwq-DLl5VAhsELXxiI1tmGN_eFFLGZMypCIGKyxYd3vWiVZOBxMuQikuhLpVCZLoBrZp85oALBFqYjAgezlFZgqMhWqhpCILudTcDQKCnFruGq_KW4RFA4S4ZHuuvC56Cx9-R9P6BN8Nr4Lzf52tPG3A4jo10izt9a19MUmvWgV1pmgrZocErgb8awCLURB0v5rbCMxC6MNZ9lxNGqu7iaOwVzWoyiH2lzmSxuUFEVfHRijwaoobEUV20FHoC6sSEOVwEMplWKwSJ2QxnAlTJwNtBsiDDeSzWyNskJdhDejVqp7rL_s4Hi7ciWzF0Uues856uaLeE4qrvbA=w1280-h853-s-no?authuser=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    padding-top: 400px;
+    padding-bottom: 400px;
+}
+
 
 body {
     text-align: center;
@@ -14,7 +52,7 @@ body {
     margin: 20px;
     padding: 10px;
     border: 1px solid #ccc;
-    /* border-radius: 5px; */
+    border-radius: 5px;
 }
 
 .card img {
