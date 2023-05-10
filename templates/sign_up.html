@@ -2,5 +2,14 @@
 
 {% block body %}
     <h1>Sign Up Page</h1>
+
+    <form method="POST">
+        <input type="text" name="full_name" id="full_name" required placeholder="Full Name">
+        <input type="text" name="mobile" id="mobile" required placeholder="Mobile">
+        <input type="email" name="email" id="email" required placeholder="Email">
+        <input type="password" name="password" id="password" required placeholder="Password">
+        <button type="submit">Sign Up</button>
+    </form>
+    
     <a href="/login">Already have an account? Log In</a>
 {% endblock %}

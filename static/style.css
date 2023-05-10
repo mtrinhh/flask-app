@@ -1,8 +1,30 @@
+* {
+    font-family: 'Playfair Display', Georgia, serif;
+    border-radius: 1px solid red;
+    margin: auto;
+    max-width: 1200px;
+}
+
 body {
     text-align: center;
 }
 
-img {
-    max-width: 200px;
+.card {
+    width: 300px;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.card img {
+    max-width: 70%;
+    height: auto;
+}
+
+#display-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
