@@ -68,6 +68,7 @@ def sign_up():
         return render_template('sign_up.html')
 
 
+
 @app.route('/gallery')
 def gallery():
     connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
@@ -75,12 +76,26 @@ def gallery():
     cursor.execute("SELECT * FROM items")
     results = cursor.fetchall()
     print(results)  
-    connection.commit()    
+    connection.commit()  
     return render_template('gallery.html', items=results)
+
 
 
 @app.route('/cart')
 def shopping_cart():
+    return render_template('shopping_cart.html')
+
+@app.route('/cart', methods=['POST'])
+def add_to_cart():
+    item_name = request.form['item_name']
+    quantity = request.form['quantity']
+    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO shopping_cart (item_name, quantity) VALUES (%s, %s)", (item_name, quantity))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    
     return render_template('shopping_cart.html')
 
 

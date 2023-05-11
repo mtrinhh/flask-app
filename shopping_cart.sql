@@ -1,13 +1,11 @@
 
 
-CREATE TABLE shopping_cart (
-    id SERIAL PRIMARY KEY,
-    item_name VARCHAR(255) NOT NULL,
-    quantity INTEGER NOT NULL,
-    price INTEGER NOT NULL,
-    user_id INTEGER REFERENCES users(id)
-);
+CREATE TABLE shopping_cart(
+    id SERIAL PRIMARY KEY, 
+    item_id INT REFERENCES items(id) ON DELETE CASCADE,
+    quantity INT NOT NULL);
 
-
+INSERT INTO shopping_cart(item_id, quantity) VALUES (1, 5);
+INSERT INTO shopping_cart(item_id, quantity) VALUES (100, 5);
 
 -- psql -U postgres -p 5433 itemsforhire -f shopping_cart.sql
