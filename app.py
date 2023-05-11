@@ -75,7 +75,7 @@ def gallery():
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM items")
     results = cursor.fetchall()
-    print(results)  
+    
     connection.commit()  
     return render_template('gallery.html', items=results)
 
