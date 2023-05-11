@@ -2,21 +2,42 @@
 
 {% block body %}
 
-<h1>Contact Us</h1>
-<div id="contact">
-    <input type="text" placeholder="Name" required>
+<div id="contact-container">
+    <h1>Contact Us</h1>
+    <div id="contact-box">
+        <div id="contact-left">
+            <h3>Details</h3>
+            <form>  
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="full name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="text" placeholder="example@example.com" required> 
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">                        
+                        <label>Phone</label>
+                        <input type="text" placeholder="04" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Date of Event</label>
+                        <input type="text" placeholder="dd/mm/yyyy" required>
+                    </div>
+                </div>
+                <label>Message</label>
+                <textarea rows="5" placeholder="Your message here"></textarea>
+                <button type="submit">Enquire</button>
+            </form>
+        </div>
+        <div id="contact-right">
+            <h3>Some Heading</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas dolor, doloribus rem recusandae perspiciatis odit quibusdam quod cumque autem porro, laborum harum similique architecto quo, aperiam quam! Dolorem, atque vitae.</p>
+        </div>
+    </div>
     
-    <input type="text" placeholder="Email" required>
     
-    <input type="number" placeholder="Phone" required>
-    
-    <input type="text" placeholder="Event Type" required>
-    
-    <input type="text" placeholder="Event Date" required>
-    
-    <input type="text" placeholder="Message " required>
-    
-    <button type="submit">Enquire</button>
-</div>
-
-{% endblock %}
+    {% endblock %}
