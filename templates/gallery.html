@@ -5,14 +5,16 @@
     <div id="card-container">
         {%for item in items%}
         <div class="card">
-            <form action="" method="post">
+            <form action="/cart" method="post">
                 <img src={{item[3]}}>
                 <h3>{{item[1]}}</h3>
                 <p>Availabe: {{item[4]}}</p>          
                 <label for="quantity">Select Quantity:</label>
-                <input type="number" min="1" max={{item[4]}}>
+                <input type="number" name="quantity" min="1" max={{item[4]}}>
+                <input type="hidden" name="item_id" value={{item[0]}}>
                 <button type="submit">Add to cart</button>
             </form>
+            
         </div>
         {%endfor%}
     </div>

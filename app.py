@@ -84,20 +84,43 @@ def gallery():
 
 @app.route('/cart')
 def shopping_cart():
-    return render_template('shopping_cart.html')
-
-@app.route('/cart', methods=['POST'])
-def add_to_cart():
-    item_name = request.form['item_name']
-    quantity = request.form['quantity']
     connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO shopping_cart (item_name, quantity) VALUES (%s, %s)", (item_name, quantity))
+    cursor.execute("SELECT items.item_name, items.price, shopping_cart.quantity FROM shopping_cart JOIN items ON shopping_cart.item_id=items.id")
+    items = cursor.fetchall()
     connection.commit()
     cursor.close()
     connection.close()
-    
-    return render_template('shopping_cart.html')
+    return render_template('shopping_cart.html', items=items)
+
+
+
+@app.route('/cart', methods=['POST'])
+def add_to_cart():
+    item_id = request.form['item_id']
+    quantity = request.form['quantity']
+
+    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    cursor = connection.cursor()
+
+    # check if the item already exists in the shopping cart
+    cursor.execute("SELECT * FROM shopping_cart WHERE item_id = %s", (item_id,))
+    result = cursor.fetchone()
+
+    if result:
+        # update its quantity if the item exists
+        new_quantity = result[2] + int(quantity)
+        cursor.execute("UPDATE shopping_cart SET quantity = %s WHERE item_id = %s", (new_quantity, item_id))
+    else:
+        # insertnew item with the quantity
+        cursor.execute("INSERT INTO shopping_cart (item_id, quantity) VALUES (%s, %s)", (item_id, quantity))
+
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+    return redirect('/cart')
+
 
 
 

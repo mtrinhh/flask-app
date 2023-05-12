@@ -6,6 +6,6 @@ CREATE TABLE shopping_cart(
     quantity INT NOT NULL);
 
 INSERT INTO shopping_cart(item_id, quantity) VALUES (1, 5);
-INSERT INTO shopping_cart(item_id, quantity) VALUES (100, 5);
+INSERT INTO shopping_cart(item_id, quantity) VALUES (2, 10);
 
 -- psql -U postgres -p 5433 itemsforhire -f shopping_cart.sql
