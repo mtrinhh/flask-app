@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 from decouple import config
 # from models import common
 import psycopg2
+import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "My secret key"
@@ -31,7 +32,8 @@ def login_form():
     email = request.form.get("email")
     password = request.form.get("password")
 
-    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    connection = psycopg2.connect(os.getenv("DATABASE_URL"))
     cursor = connection.cursor()
 
     cursor.execute("SELECT * FROM users WHERE email=%s AND password=%s", (email, password))
@@ -55,8 +57,8 @@ def sign_up():
         mobile = request.form.get("mobile")
         email = request.form.get("email")
         password = request.form.get("password")
-        
-        connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+        # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+        connection = psycopg2.connect(os.getenv("DATABASE_URL"))
         cursor = connection.cursor()
         cursor.execute("INSERT INTO users (full_name, mobile, email, password) VALUES (%s, %s, %s, %s)", (full_name, mobile, email, password))
         connection.commit()
@@ -71,7 +73,8 @@ def sign_up():
 
 @app.route('/gallery')
 def gallery():
-    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    connection = psycopg2.connect(os.getenv("DATABASE_URL"))
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM items")
     results = cursor.fetchall()
@@ -84,7 +87,8 @@ def gallery():
 
 @app.route('/cart')
 def shopping_cart():
-    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    connection = psycopg2.connect(os.getenv("DATABASE_URL"))
     cursor = connection.cursor()
     cursor.execute("SELECT items.item_name, items.price, shopping_cart.quantity FROM shopping_cart JOIN items ON shopping_cart.item_id=items.id")
     items = cursor.fetchall()
@@ -100,7 +104,8 @@ def add_to_cart():
     item_id = request.form['item_id']
     quantity = request.form['quantity']
 
-    connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+    connection = psycopg2.connect(os.getenv("DATABASE_URL"))
     cursor = connection.cursor()
 
     # check if the item already exists in the shopping cart
@@ -118,9 +123,26 @@ def add_to_cart():
     connection.commit()
     cursor.close()
     connection.close()
-
     return redirect('/cart')
 
+
+@app.route('/remove_item', methods=['POST'])
+def remove_item():
+    item_id = request.form['item_id']
+    if item_id:
+        item_id = int(item_id)
+
+        # connection = psycopg2.connect(dbname="itemsforhire", user='postgres', port=5433, password=config('SECRET_KEY'))
+        connection = psycopg2.connect(os.getenv("DATABASE_URL"))
+        cursor = connection.cursor()
+
+        cursor.execute("DELETE FROM shopping_cart WHERE item_id = %s", (item_id,))
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+    return redirect('/cart')
 
 
 
