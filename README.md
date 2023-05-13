@@ -11,7 +11,7 @@ The following technologies were used to create the Melbourne Event Hire Website:
 - Python
 - PostgresSQL
 
-The Melbourne Event Hire Website is currently deployed online at [Melbourne Event Hire Website](https://flask-app-iyi5.onrender.com/home).
+The Melbourne Event Hire Website is currently deployed online at [Melbourne Event Hire Website](https://flask-app-xqsd.onrender.com/home).
 
 
 # Troubleshooting
